@@ -1,0 +1,90 @@
+#!/usr/bin/env node
+/**
+ * chinavisacalc-cli v1.0.0
+ * China Foreigner Work Permit Tier A/B/C SAFEA Points Calculator CLI
+ * Official reference utility for https://chinavisacalc.com
+ * License: MIT
+ */
+
+const ROUTES = [
+  {
+    "name": "ChinaVisaCalc Home",
+    "url": "https://chinavisacalc.com/"
+  },
+  {
+    "name": "China Z-Visa Step-by-Step Application Requirements (2026)",
+    "url": "https://chinavisacalc.com/z-visa"
+  },
+  {
+    "name": "China Work Permit Categories (A, B, C) Overview",
+    "url": "https://chinavisacalc.com/work-visa"
+  },
+  {
+    "name": "SAFEA Points Optimization & Eligibility Guides",
+    "url": "https://chinavisacalc.com/guides"
+  },
+  {
+    "name": "China Work Visa Without a Bachelor Degree: 4 Legal Pathways",
+    "url": "https://chinavisacalc.com/guides/work-visa-without-degree"
+  },
+  {
+    "name": "How to Reach 60 Points for Tier B Work Permit: 7 Strategies",
+    "url": "https://chinavisacalc.com/guides/how-to-reach-60-points"
+  }
+];
+
+const SPECS = [
+  {
+    "Permit Tier": "Category A (High-End)",
+    "Points Threshold": ">= 85 points",
+    "Core Eligibility Pathway": "6x local avg salary OR Fortune 500 / Top-100 Univ STEM PhD",
+    "Age Cap Policy": "No statutory age cap",
+    "Processing Track": "Green-channel ~5 working days, pre-arrival paperless"
+  },
+  {
+    "Permit Tier": "Category B (Professional)",
+    "Points Threshold": "60 - 84 points",
+    "Core Eligibility Pathway": "Bachelor degree + >= 2 yrs post-grad relevant experience OR >= 60 pts",
+    "Age Cap Policy": "18 - 60 years standard",
+    "Processing Track": "Standard Foreigner Work Permit Notice -> Z Visa -> Residence Permit"
+  },
+  {
+    "Permit Tier": "Category C (Temporary/Quota)",
+    "Points Threshold": "< 60 points",
+    "Core Eligibility Pathway": "Short-term (<90d), seasonal, or young-talent bilateral quota",
+    "Age Cap Policy": "18 - 60 years",
+    "Processing Track": "Subject to municipal labor market quota"
+  }
+];
+
+const args = process.argv.slice(2);
+
+if (args.includes('--version') || args.includes('-v')) {
+  console.log('chinavisacalc-cli v1.0.0 (https://chinavisacalc.com)');
+  process.exit(0);
+}
+
+if (args.includes('--routes')) {
+  console.log(JSON.stringify({ domain: 'chinavisacalc.com', endpoints: ROUTES }, null, 2));
+  process.exit(0);
+}
+
+if (args.includes('--specs') || args.includes('--json')) {
+  console.log(JSON.stringify({ domain: 'chinavisacalc.com', benchmark: "Foreigner Work Permit Classification & SAFEA Points Matrix", rows: SPECS }, null, 2));
+  process.exit(0);
+}
+
+console.log([
+  'ChinaVisaCalc CLI (chinavisacalc-cli v1.0.0)',
+  'China Foreigner Work Permit Tier A/B/C SAFEA Points Calculator CLI',
+  'Homepage: https://chinavisacalc.com',
+  '',
+  'Usage:',
+  '  chinavisacalc-cli --help       Show command overview and verified endpoints',
+  '  chinavisacalc-cli --version    Print CLI version',
+  '  chinavisacalc-cli --specs      Output domain technical specification matrix as JSON',
+  '  chinavisacalc-cli --routes     Output verified production URLs as JSON',
+  '',
+  'Verified Production Endpoints:',
+  ...ROUTES.map((r) => '  - ' + r.name + ': ' + r.url),
+].join('\n'));
